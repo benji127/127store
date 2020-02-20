@@ -12,6 +12,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { CartService } from './cart.service';
 import { CartComponent } from './cart/cart.component';
 import { ShippingComponent } from './shipping/shipping.component';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { ShippingComponent } from './shipping/shipping.component';
     ProductAlertsComponent,
     ProductDetailsComponent,
     CartComponent,
-    ShippingComponent
+    ShippingComponent,
+    AlertComponent
   ],
   bootstrap: [ AppComponent ],
   providers: [CartService]
