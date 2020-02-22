@@ -12,7 +12,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { CartService } from './cart.service';
 import { CartComponent } from './cart/cart.component';
 import { ShippingComponent } from './shipping/shipping.component';
-import { AlertComponent } from './alert/alert.component';
+import { AlertComponent } from './_directives';
 
 @NgModule({
   imports: [
