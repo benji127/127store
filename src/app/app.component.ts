@@ -1,15 +1,38 @@
-import { Component } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Router, NavigationStart } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: [ './app.component.css' ]
-})
-export class AppComponent  {}
+@Injectable()
+export class AlertService {
+    private subject = new Subject<any>();
+    private keepAfterNavigationChange = false;
 
+    constructor(private router: Router) {
+        // clear alert message on route change
+        router.events.subscribe(event => {
+            if (event instanceof NavigationStart) {
+                if (this.keepAfterNavigationChange) {
+                    // only keep for a single location change
+                    this.keepAfterNavigationChange = false;
+                } else {
+                    // clear alert
+                    this.subject.next();
+                }
+            }
+        });
+    }
 
-/*
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
-*/
+    success(message: string, keepAfterNavigationChange = false) {
+        this.keepAfterNavigationChange = keepAfterNavigationChange;
+        this.subject.next({ type: 'success', text: message });
+    }
+
+    error(message: string, keepAfterNavigationChange = false) {
+        this.keepAfterNavigationChange = keepAfterNavigationChange;
+        this.subject.next({ type: 'error', text: message });
+    }
+
+    getMessage(): Observable<any> {
+        return this.subject.asObservable();
+    }
+}

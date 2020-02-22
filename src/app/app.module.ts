@@ -13,6 +13,8 @@ import { CartService } from './cart.service';
 import { CartComponent } from './cart/cart.component';
 import { ShippingComponent } from './shipping/shipping.component';
 import { AlertComponent } from './_directives';
+import { AlertService } from './alert.service';
+import { UserService } from './user.service';
 
 @NgModule({
   imports: [
@@ -37,7 +39,7 @@ import { AlertComponent } from './_directives';
     AlertComponent
   ],
   bootstrap: [ AppComponent ],
-  providers: [CartService]
+  providers: [CartService, AlertService, UserService]
 })
 export class AppModule { }
 
