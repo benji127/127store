@@ -15,6 +15,7 @@ import { ShippingComponent } from './shipping/shipping.component';
 import { AlertComponent } from './_directives';
 import { AlertService } from './alert.service';
 import { UserService } from './user.service';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import { UserService } from './user.service';
     ProductDetailsComponent,
     CartComponent,
     ShippingComponent,
-    AlertComponent
+    AlertComponent,
+    HomeComponent
   ],
   bootstrap: [ AppComponent ],
   providers: [CartService, AlertService, UserService]
