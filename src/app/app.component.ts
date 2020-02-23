@@ -1,38 +1,46 @@
-import { Injectable } from '@angular/core';
-import { Router, NavigationStart } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { Component } from '@angular/core';
 
-@Injectable()
-export class AlertService {
-    private subject = new Subject<any>();
-    private keepAfterNavigationChange = false;
+@Component({
+    selector: 'app',
+    templateUrl: 'app.component.html'
+})
 
-    constructor(private router: Router) {
-        // clear alert message on route change
-        router.events.subscribe(event => {
-            if (event instanceof NavigationStart) {
-                if (this.keepAfterNavigationChange) {
-                    // only keep for a single location change
-                    this.keepAfterNavigationChange = false;
-                } else {
-                    // clear alert
-                    this.subject.next();
-                }
-            }
-        });
-    }
+export class AppComponent { }
+// import { Injectable } from '@angular/core';
+// import { Router, NavigationStart } from '@angular/router';
+// import { Observable, Subject } from 'rxjs';
 
-    success(message: string, keepAfterNavigationChange = false) {
-        this.keepAfterNavigationChange = keepAfterNavigationChange;
-        this.subject.next({ type: 'success', text: message });
-    }
+// @Injectable()
+// export class AlertService {
+//     private subject = new Subject<any>();
+//     private keepAfterNavigationChange = false;
 
-    error(message: string, keepAfterNavigationChange = false) {
-        this.keepAfterNavigationChange = keepAfterNavigationChange;
-        this.subject.next({ type: 'error', text: message });
-    }
+//     constructor(private router: Router) {
+//         // clear alert message on route change
+//         router.events.subscribe(event => {
+//             if (event instanceof NavigationStart) {
+//                 if (this.keepAfterNavigationChange) {
+//                     // only keep for a single location change
+//                     this.keepAfterNavigationChange = false;
+//                 } else {
+//                     // clear alert
+//                     this.subject.next();
+//                 }
+//             }
+//         });
+//     }
 
-    getMessage(): Observable<any> {
-        return this.subject.asObservable();
-    }
-}
+//     success(message: string, keepAfterNavigationChange = false) {
+//         this.keepAfterNavigationChange = keepAfterNavigationChange;
+//         this.subject.next({ type: 'success', text: message });
+//     }
+
+//     error(message: string, keepAfterNavigationChange = false) {
+//         this.keepAfterNavigationChange = keepAfterNavigationChange;
+//         this.subject.next({ type: 'error', text: message });
+//     }
+
+//     getMessage(): Observable<any> {
+//         return this.subject.asObservable();
+//     }
+// }
